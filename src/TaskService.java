@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class TaskService {
@@ -23,14 +24,22 @@ public class TaskService {
             tasks.add(task);
             repo.save(tasks);
         } catch (IOException e) {
-            System.out.println("Error while saving task");
+            System.out.println("Error while saving task.");
         }
     }
 
-
-
-    public void updateTask(int id, String newDescription) throws IOException {
-        List<Task> tasks = repo.load();
-
+    public void updateTask(int id, String newDescription) {
+        try {
+            List<Task> tasks = repo.load();
+            for (Task task : tasks) {
+                if (task.getId() == id) {
+                    task.setDescription(newDescription);
+                    task.setUpdatedAt(LocalDateTime.now()); // set the last time the task was updated
+                }
+            }
+            repo.save(tasks); // update tasks
+        } catch (IOException e) {
+            System.out.println("Error while updating task.");
+        }
     }
 }
