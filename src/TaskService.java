@@ -1,10 +1,12 @@
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskService {
     private final TaskRepository repo = new TaskRepository();
 
+    // TODo implement error when task is not found
     private int generateId(List<Task> tasks) {
         int maxId = 0;
         for (Task task : tasks) {
@@ -35,11 +37,43 @@ public class TaskService {
                 if (task.getId() == id) {
                     task.setDescription(newDescription);
                     task.setUpdatedAt(LocalDateTime.now()); // set the last time the task was updated
+                    break;
                 }
             }
             repo.save(tasks); // update tasks
         } catch (IOException e) {
             System.out.println("Error while updating task.");
         }
+    }
+
+    public void deleteTask(int id) {
+        try {
+            List<Task> tasks = repo.load();
+            tasks.removeIf(task -> task.getId() == id);
+            repo.save(tasks);
+        } catch (IOException e) {
+            System.out.println("Error while deleting task.");
+        }
+    }
+
+    public void updateStatus(int id, Status status) throws IOException {
+        List<Task> tasks = repo.load();
+        for (Task task : tasks) {
+            if (task.getId() == id) {
+                task.setStatus(status);
+                task.setUpdatedAt(LocalDateTime.now());
+                break;
+            }
+        }
+        repo.save(tasks);
+    }
+
+    public List<Task> getTasks() {
+        try {
+            return repo.load();
+        } catch (IOException e) {
+            System.out.println("Error while getting tasks.");
+        }
+        return new ArrayList<>();
     }
 }

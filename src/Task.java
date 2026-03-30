@@ -3,9 +3,9 @@ import java.time.LocalDateTime;
 public class Task {
     private final int id;
     private String description;
-    Status status;
-    LocalDateTime createdAt; // when the task was created
-    LocalDateTime updatedAt; // when the task was last updated
+    private Status status;
+    private LocalDateTime createdAt; // when the task was created
+    private LocalDateTime updatedAt; // when the task was last updated
 
     public Task(int id, String description){ // create task
         this.id = id;
@@ -22,5 +22,11 @@ public class Task {
 
     public void setDescription(String description) { this.description = description; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+
+    public void setStatus(Status status) { this.status = status; }
+
+    public String toString(){
+        return "Id: " + id + "; Description: " + description + "; Status: " + status;
+    }
 
 }
