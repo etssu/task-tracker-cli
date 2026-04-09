@@ -22,6 +22,7 @@ public class TaskService {
         Task task = new Task(id, description);
         tasks.add(task);
         repo.save(tasks);
+        System.out.println("Task added successfully (ID: " + id + ")");
     }
 
     public void updateTask(int id, String newDescription) throws IOException {

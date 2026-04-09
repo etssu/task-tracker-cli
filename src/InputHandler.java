@@ -1,3 +1,4 @@
+import java.io.IOException;
 
 public class InputHandler {
     private final TaskService service;
@@ -27,7 +28,9 @@ public class InputHandler {
                 case "list":
                     if (args.length < 2 || args[1].isEmpty() ) {
                         service.printAllTasks();
+                        break;
                     }
+
                     try {
                         Status status = Status.valueOf(args[1].toUpperCase());
                         service.printTasksByStatus(status);
@@ -40,9 +43,8 @@ public class InputHandler {
             }
         } catch (NumberFormatException e) {
             System.out.println("Wrong format. Try again.");
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
