@@ -17,7 +17,7 @@ public class TaskRepository {
             sb.append("  {\n");
             sb.append("    \"id\": ").append(t.getId()).append(",\n");
             sb.append("    \"description\": \"").append(t.getDescription()).append("\",\n");
-            sb.append("    \"status\": \"").append(t.status).append("\"\n");
+            sb.append("    \"status\": \"").append(t.getStatus()).append("\"\n");
             sb.append("    \"created-at\": \"").append(t.getCreatedAt()).append("\"\n");
             sb.append("    \"updated-at\": \"").append(t.getUpdatedAt()).append("\"\n");
             sb.append("  }");
@@ -28,7 +28,7 @@ public class TaskRepository {
         Files.writeString(FILE.toPath(), sb.toString());
     }
 
-    public List<Task> parse(String json) throws IOException {
+    public List<Task> parse(String json) {
         List<Task> tasks = new ArrayList<>();
 
         String[] blocks = json.split("\\{");
@@ -41,7 +41,7 @@ public class TaskRepository {
             Status status = Status.valueOf(extractValue(block, "status"));
 
             Task task = new Task(id, description);
-            task.status = status;
+            task.setStatus(status);
             tasks.add(task);
         }
 

@@ -1,43 +1,48 @@
-import java.sql.SQLOutput;
-import java.util.List;
 
 public class InputHandler {
-    public InputHandler(String args0, String args1, String args2) {
-        TaskService service = new TaskService();
-        // args[0] - command
-        // args[1] - index
-        // args[2] - description
+    private final TaskService service;
 
+    public InputHandler(TaskService service) {
+        this.service = service;
+    }
+
+    public void handle(String[] args) {
         try {
-            switch (args0) {
+            switch (args[0]) {
                 case "add":
-                    service.addTask(args1);
+                    service.addTask(args[1]);
                     break;
                 case "update":
-                    service.updateTask(Integer.parseInt(args1), args2); // args1 - index, args2 - description
+                    service.updateTask(Integer.parseInt(args[1]), args[2]); // args1 - index, args2 - description
                     break;
                 case "delete":
-                    service.deleteTask(Integer.parseInt(args1));
+                    service.deleteTask(Integer.parseInt(args[1]));
                     break;
                 case "mark-in-progress":
-                    service.updateStatus(Integer.parseInt(args1), Status.IN_PROGRESS);
+                    service.updateStatus(Integer.parseInt(args[1]), Status.IN_PROGRESS);
+                    break;
                 case "mark-done":
-                    service.updateStatus(Integer.parseInt(args1), Status.DONE);
+                    service.updateStatus(Integer.parseInt(args[1]), Status.DONE);
+                    break;
                 case "list":
+                    if (args.length < 2 || args[1].isEmpty() ) {
+                        service.printAllTasks();
+                    }
+                    try {
+                        Status status = Status.valueOf(args[1].toUpperCase());
+                        service.printTasksByStatus(status);
+                    }  catch (IllegalArgumentException e) {
+                        System.out.println("Invalid status");
+                    }
+                    break;
                 default:
                     System.out.println("Wrong command. Try again.");
             }
         } catch (NumberFormatException e) {
             System.out.println("Wrong format. Try again.");
         }
-        catch (NullPointerException e) {
-            System.out.println("Null-pointer");
-        }
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
-        // string instead of int
-        //
     }
 }

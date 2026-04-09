@@ -4,7 +4,7 @@ public class Task {
     private final int id;
     private String description;
     private Status status;
-    private LocalDateTime createdAt; // when the task was created
+    private final LocalDateTime createdAt; // when the task was created
     private LocalDateTime updatedAt; // when the task was last updated
 
     public Task(int id, String description){ // create task
@@ -19,6 +19,7 @@ public class Task {
     public String getDescription() { return description; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public Status getStatus() { return status; }
 
     public void setDescription(String description) { this.description = description; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
