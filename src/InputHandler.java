@@ -9,6 +9,11 @@ public class InputHandler {
 
     public void handle(String[] args) {
         try {
+            if (args.length == 0) {
+                System.out.println("No arguments.");
+                return;
+            }
+
             switch (args[0]) {
                 case "add":
                     service.addTask(args[1]);
