@@ -2,15 +2,22 @@
   {
     "id": 3,
     "description": "buy milk",
-    "status": "DONE"
-    "created-at": "2026-04-09T20:35:58.303896400"
-    "updated-at": "2026-04-09T20:35:58.305396300"
+    "status": "IN_PROGRESS"
+    "created-at": "2026-04-11T16:47:56.806039200"
+    "updated-at": "2026-04-11T16:47:56.808038800"
   },
   {
     "id": 4,
     "description": "Buy a house",
     "status": "IN_PROGRESS"
-    "created-at": "2026-04-09T20:35:58.305396300"
-    "updated-at": "2026-04-09T20:35:58.305396300"
+    "created-at": "2026-04-11T16:47:56.808038800"
+    "updated-at": "2026-04-11T16:47:56.808038800"
+  },
+  {
+    "id": 5,
+    "description": "Buy a house",
+    "status": "TODO"
+    "created-at": "2026-04-11T16:47:56.808038800"
+    "updated-at": "2026-04-11T16:47:56.808038800"
   }
 ]

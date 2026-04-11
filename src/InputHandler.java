@@ -32,7 +32,8 @@ public class InputHandler {
                     }
 
                     try {
-                        Status status = Status.valueOf(args[1].toUpperCase());
+                        String normalized = args[1].toUpperCase().replace("-", "_");
+                        Status status = Status.valueOf(normalized);
                         service.printTasksByStatus(status);
                     }  catch (IllegalArgumentException e) {
                         System.out.println("Invalid status");
@@ -44,7 +45,7 @@ public class InputHandler {
         } catch (NumberFormatException e) {
             System.out.println("Wrong format. Try again.");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }
